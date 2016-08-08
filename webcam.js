@@ -120,3 +120,57 @@ get_html: function(width, height, server_width, server_height) {
 		
 		this.get_movie()._upload( this.api_url );
 	},
+	reset: function() {
+		// reset movie after taking snapshot
+		this.get_movie()._reset();
+	},
+	
+	configure: function(panel) {
+		// open flash configuration panel -- specify tab name:
+		// "camera", "privacy", "default", "localStorage", "microphone", "settingsManager"
+		if (!panel) panel = "camera";
+		this.get_movie()._configure(panel);
+	},
+	
+	set_quality: function(new_quality) {
+		// set the JPEG quality (1 - 100)
+		// default is 90
+		this.quality = new_quality;
+	},
+	
+	set_shutter_sound: function(enabled, url) {
+		// enable or disable the shutter sound effect
+		// defaults to enabled
+		this.shutter_sound = enabled;
+		this.shutter_url = url ? url : 'shutter.mp3';
+	},
+	
+	flash_notify: function(type, msg) {
+		// receive notification from flash about event
+		switch (type) {
+			case 'flashLoadComplete':
+				// movie loaded successfully
+				this.loaded = true;
+				this.fire_hook('onLoad');
+				break;
+
+			case 'error':
+				// HTTP POST error most likely
+				if (!this.fire_hook('onError', msg)) {
+					alert("JPEGCam Flash Error: " + msg);
+				}
+				break;
+
+			case 'success':
+				// upload complete, execute user callback function
+				// and pass raw API script results to function
+				this.fire_hook('onComplete', msg.toString());
+				break;
+
+			default:
+				// catch-all, just in case
+				alert("jpegcam flash_notify: " + type + ": " + msg);
+				break;
+		}
+	}
+};
