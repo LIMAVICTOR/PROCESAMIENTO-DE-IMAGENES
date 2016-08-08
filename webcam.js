@@ -82,3 +82,41 @@ get_html: function(width, height, server_width, server_height) {
 		this.loaded = false;
 		return html;
 	},
+	get_movie: function() {
+		// get reference to movie object/embed in DOM
+		if (!this.loaded) return alert("ERROR: Movie is not loaded yet");
+		var movie = document.getElementById('webcam_movie');
+		if (!movie) alert("ERROR: Cannot locate movie 'webcam_movie' in DOM");
+		return movie;
+	},
+	
+	set_stealth: function(stealth) {
+		// set or disable stealth mode
+		this.stealth = stealth;
+	},
+	
+	snap: function(url, callback, stealth) {
+		// take snapshot and send to server
+		// specify fully-qualified URL to server API script
+		// and callback function (string or function object)
+		if (callback) this.set_hook('onComplete', callback);
+		if (url) this.set_api_url(url);
+		if (typeof(stealth) != 'undefined') this.set_stealth( stealth );
+		
+		this.get_movie()._snap( this.api_url, this.quality, this.shutter_sound ? 1 : 0, this.stealth ? 1 : 0 );
+	},
+	
+	freeze: function() {
+		// freeze webcam image (capture but do not upload)
+		this.get_movie()._snap('', this.quality, this.shutter_sound ? 1 : 0, 0 );
+	},
+	
+	upload: function(url, callback) {
+		// upload image to server after taking snapshot
+		// specify fully-qualified URL to server API script
+		// and callback function (string or function object)
+		if (callback) this.set_hook('onComplete', callback);
+		if (url) this.set_api_url(url);
+		
+		this.get_movie()._upload( this.api_url );
+	},
