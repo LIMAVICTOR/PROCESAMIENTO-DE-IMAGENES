@@ -19,11 +19,4 @@ window.webcam = {
 		onError: null
 	}, // callback hook functions
 	
-	set_hook: function(name, callback) {
-		// set callback hook
-		// supported hooks: onLoad, onComplete, onError
-		if (typeof(this.hooks[name]) == 'undefined')
-			return alert("Hook type not supported: " + name);
-		
-		this.hooks[name] = callback;
-	},
+	
