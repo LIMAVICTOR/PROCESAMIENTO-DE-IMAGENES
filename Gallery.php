@@ -92,4 +92,36 @@
 				<div class="tweets">
 					<p class="cols"><strong>País: Perú<br>
 
-					
+Región: Apurimac<br>
+Provincia: Andahuaylas<br>
+Email</strong><a href="mailto:">andahuaylas@hotmail.com</a></p>
+					<p>&nbsp;</p>
+</div>
+	   		</article>
+		</div>
+	</section>
+<!-- / content -->
+<!-- footer -->
+	<footer>
+		<div class="wrapper"></div>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+		<p><a href="index.html" class="footer_logo">andahuaylas<span>@HOTMAIL.</span>.com</a></p>
+    </footer>
+<!-- / footer -->
+</div>
+<script type="text/javascript">Cufon.now();</script>
+<script type="text/javascript">
+	$(document).ready(function(){
+			if ($("a[rel^='prettyPhoto']").length) {
+			$(document).ready(function() {
+				// prettyPhoto
+				$("a[rel^='prettyPhoto']").prettyPhoto({theme:'facebook'});
+				///// codegrabber ////////////
+				$(".code a.code-icon").toggle(function(){$(this).addClass("minus").next("p").slideDown();}, function(){$(this).removeClass("minus").next("p").slideUp();})
+			});
+		}
+	});
+</script>
+</body>
+</html>
