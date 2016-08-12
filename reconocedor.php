@@ -92,3 +92,70 @@
 	});
 	</script>
 
+
+
+<div id="container">
+	<div id="content">
+		<a href="#" id="try">Capturar</a>
+ <?php  
+  include("conexion.php");
+  $id=$_GET['id'];
+  $consulta="select * from fotos where id_foto='$id'";
+  $busca_fotos=mysql_query($consulta,$c);
+  while($ro=mysql_fetch_array($busca_fotos)){
+      $url=$ro['id_foto'];  
+      $nombre=$ro['nombre']; 
+      $des=$ro['des'];
+  }
+?>		
+        <img src="fotos/<?php echo $url?>.jpg" id="myPicture"/>
+	</div>
+</div>    
+
+
+</div>
+					</div>
+				</div>
+	   		</article>
+			<article class="col2">
+				<h3>Latest Works</h3>
+				<ul class="ul_works">
+					<li><a href="#"><img src="images/page1_img1.png" alt=""></a></li>
+					<li><a href="#"><img src="images/page1_img2.png" alt=""></a></li>
+				</ul>
+				<h4>Información:</h4>
+				<div class="tweets">
+					<p><span class="cols"><strong>País: Perú<br>
+Región: Apurimac<br>
+Provincia: Andahuaylas<br>
+Email:<a href="mailto:">andahuaylas@hotmail.com</a></strong></span></p>
+				</div>
+	   		</article>
+		</div>
+	</section>
+<!-- / content -->
+<!-- footer -->
+	<footer>
+		<div class="wrapper"></div>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+		<p><a href="index.html" class="footer_logo">andahuaylas<span>@HOTMAIL</span>.com</a></p>
+    </footer>
+<!-- / footer -->
+</div>
+<script type="text/javascript">Cufon.now();</script>
+<script type="text/javascript">
+	$(document).ready(function(){
+			if ($("a[rel^='prettyPhoto']").length) {
+			$(document).ready(function() {
+				// prettyPhoto
+				$("a[rel^='prettyPhoto']").prettyPhoto({theme:'facebook'});
+				///// codegrabber ////////////
+				$(".code a.code-icon").toggle(function(){$(this).addClass("minus").next("p").slideDown();}, function(){$(this).removeClass("minus").next("p").slideUp();})
+			});
+		}
+	});
+</script>
+</body>
+</html>
