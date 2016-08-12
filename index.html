@@ -50,4 +50,149 @@
 		webcam.set_shutter_sound( true ); 
 	</script>
 	
-	
+	<script language="JavaScript">
+		webcam.set_hook( 'onComplete', 'my_completion_handler' );
+		function do_upload() {
+			document.getElementById('upload_results').innerHTML = '<h1>Cargando a la Base Datos...</h1>';
+			webcam.upload();
+		}
+			
+		function my_completion_handler(msg) {	
+			if (msg.match(/(http\:\/\/\S+)/)) {
+				var image_url = RegExp.$1;
+				document.getElementById('upload_results').innerHTML = 
+					'<img src="' + image_url + '">'+
+					'<form action="procesar_imagen.php" method="post">'+
+					'<input type="hidden" name="id_foto" id="id_foto" value="' + image_url + '"  /><br>'+
+					'<label>Nombre </label><input type="text" name="nombre_foto" id="nombre_foto"/>'+
+					'<label>Descripcion </label><input type="text" name="des" id="des"/>'+
+				    '<input type="submit" name="button" id="button" value="Enviar" /></form>'
+					;
+				webcam.reset();
+			}
+			else alert("PHP Error: " + msg);
+		}
+	</script>
+    
+    <div align="left" id="cuadro_camara">    
+    <table width="100%" height="144">
+       <tr>
+          <td width="100" valign=top>
+		    <form>
+		      <input type=button value="Configurar" onClick="webcam.configure()" class="botones_cam">
+		      <input type=button value="Tomar foto" onClick="webcam.freeze()" class="botones_cam">
+		      <input type=button value="Almacenar foto" onClick="do_upload()" class="botones_cam">
+		      <input type=button value="Reset" onClick="webcam.reset()" class="botones_cam">
+	       </form>
+	      </td>
+          <td width="263" valign=top>
+	         <script language="JavaScript">
+	            document.write( webcam.get_html(320, 240) );
+	         </script>	              
+           </td>
+        </tr>
+     </table>
+   </div>
+                                  
+                  </div>
+				<div class="pad">
+              
+				    <p><strong><div id="upload_results" class="formulario" > </div></strong></p>
+
+
+               </div>
+			  </div>
+				<h2><span>Explicación</span></h2>
+				<div class="pad_left1">
+					<div class="pad_left1">
+						<div class="wrapper pad_top1">
+							<div class="col3">
+								<div class="wrapper">
+									<figure class="left marg_right1"><img src="images/page1_img3.png" alt=""></figure>
+                                    <strong >Configurar</strong>
+                                    <br>Sirve para la configuración del Webcam 
+								</div>
+							</div>
+							<div class="col3 pad_left2">
+								<div class="wrapper">
+									<figure class="left marg_right1"><img src="images/page1_img5.png" alt=""></figure>
+									<strong class="font1">Tomar Foto</strong>
+                                    <br>La foto al momento de tomarse debe ser clara y notarse el rostro
+								</div>
+							</div>
+						</div>
+						<div class="wrapper">
+							<div class="col3">
+								<div class="wrapper">
+									<figure class="left marg_right1"><img src="images/page1_img4.png" alt=""></figure>
+									<div class="cols"><strong class="font1">Subir</strong>
+                                    <br>Se almacena en  la Base de Datos</div>
+								</div>
+							</div>
+							<div class="col3 pad_left2">
+								<div class="wrapper">
+									<figure class="left marg_right1"><img src="images/page1_img6.png" alt=""></figure>
+									<div class="cols"><strong class="font1">Reset</strong>
+                                    <br>Reinia el Webcam</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+    		</article>
+			<article class="col2">
+				<h3>Latest Works</h3>
+				<ul class="ul_works">
+					<li><a href="#"><img src="images/page1_img1.png" alt=""></a></li>
+					<li><a href="#"><img src="images/page1_img2.png" alt=""></a></li>
+				</ul>
+				<h4>Información</h4>
+				<div class="tweets">
+					<div class="wrapper">
+					  <p class="cols"><strong>País: Perú<br>
+					    Región: Apurimac<br>
+					    Provincia: Andahuaylas<br>
+					    Email:</strong> <a href="mailto:">andahuaylas@hotmail.com</a></p>
+					  <p>.</p>
+				  </div>
+					<p>&nbsp;</p>
+				</div>
+    		</article>
+		</div>
+	</section>
+<!-- / content -->
+<!-- footer -->
+	<footer>
+		<div class="wrapper"></div>
+		<a href="index.html" class="footer_logo">RECONOCIMIENTO<span>ROSTRO UNAJMA</span></a>
+	</footer>
+<!-- / footer -->
+</div>
+<script type="text/javascript">Cufon.now();</script>
+<script type="text/javascript">
+	$(window).load(function() {
+	$('#nivo_slider').nivoSlider({
+		effect:'fold', //Specify sets like: 'fold,fade,sliceDown, sliceDownLeft, sliceUp, sliceUpLeft, sliceUpDown, sliceUpDownLeft'
+		slices:7,
+		animSpeed:500,
+		pauseTime:6000,
+		startSlide:0, //Set starting Slide (0 index)
+		directionNav:true, //Next & Prev
+		directionNavHide:false, //Only show on hover
+		controlNav:true, //1,2,3...
+		controlNavThumbs:false, //Use thumbnails for Control Nav
+		controlNavThumbsFromRel:false, //Use image rel for thumbs
+		controlNavThumbsSearch: '.jpg', //Replace this with...
+		controlNavThumbsReplace: '_thumb.jpg', //...this in thumb Image src
+		keyboardNav:true, //Use left & right arrows
+		pauseOnHover:true, //Stop animation while hovering
+		manualAdvance:false, //Force manual transitions
+		captionOpacity:1, //Universal caption opacity
+		beforeChange:function(){},
+		afterChange:function(){},
+		slideshowEnd:function(){} //Triggers after all slides have been shown
+	});
+});
+</script>
+</body>
+</html>
